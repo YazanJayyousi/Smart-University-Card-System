@@ -11,7 +11,7 @@ public static class Database
     public static List<Student> Students = new List<Student>();
     public static List<FacultyMember> Faculty = new List<FacultyMember>();
     public static List<Card> Cards = new List<Card>();
-    public static List<Transaction> Transactions = new List<Transaction>();
+    public static List<Transactions> Transactions = new List<Transactions>();
     public static List<Attendance> AttendanceRecords = new List<Attendance>();
 
 // Files : 
