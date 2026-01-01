@@ -6,6 +6,13 @@ using Console = System.Console;
 
 using Models;
 
+
+
+
+
+
+
+
 public class StudentService
 {
     public static void RechargeCard (Card card)
@@ -134,7 +141,215 @@ int counter= 1;
     };
     Database.Transactions.Add(txn);
     Database.SaveTransactions();
-}
+    }
+
+
+
+       
+
+
+
+
+       public static void PayForCafeteria( Card card )
+    {
+        Console.WriteLine( "\n[CAFETERIA MENU]\n"); 
+
+        List<Menu> CafeteriaMenu =  Menu.GetMenu() ;  //Fetches Menu from Menu model (STATIC)
+
+
+
+int counter = 1 ; 
+        foreach ( Menu m in CafeteriaMenu)
+        {
+            Console.WriteLine(counter + ". Item:" + m.Item + " Price: " + m.Price) ;
+            counter++;
+        }
+        Console.WriteLine( "0. Finish Order ") ;
+
+
+                               decimal total = 0;
+bool ordering = true ;
+          while ( ordering) 
+        {
+         Console.Write("Enter Item Number :")  ;
+         string Item_NO = Console.ReadLine() ;
+         int itemIndex ; // to track index of menu 
+
+         if (Item_NO == "0")
+          {
+            if ( total ==0 ) { Console.WriteLine(" No items selected. Order cancelled.");  break ; }
+
+             else if ( total <= card.Balance)
+                {
+                   card.Balance -= total ;
+                   Database.SaveCards() ; 
+                   Console.WriteLine ( "Enter Transaction ID : ") ;
+                     string txnID = Console.ReadLine() ;
+
+                   Console.WriteLine ( " Payment Successful of amount : " + total ) ;  
+
+                   Transactions txn = new Transactions
+                   {
+                       TransactionId = txnID ,
+                          CardNumber = card.CardNumber ,
+                            TransactionType = "Payment" ,
+                                Amount = total.ToString() // Defined as string in model
+
+                   };
+                     Database.Transactions.Add(txn) ;
+                        Database.SaveTransactions() ;
+                        ordering = false ;
+                       
+                     
+                }
+           else if  ( total > card.Balance)
+             {
+                Console.WriteLine(" Insufficient Balance , Payment Failed") ;
+           
+                break ;
+             } 
+
+          }
+
+
+                 
+         else if ( int.TryParse(Item_NO , out itemIndex ) &&  itemIndex <= CafeteriaMenu.Count && itemIndex > 0)
+            {
+                               
+               int Index = itemIndex -1 ; // array index fix
+               Menu SelectedItem = CafeteriaMenu[ Index]  ; 
+                 total = total + SelectedItem.Price ;
+                   
+                   Console.WriteLine(" Item Added , Total Amount :" + total ) ; 
+
+            }
+
+            else 
+            {
+                Console.WriteLine(" Invalid Item Number ") ; 
+            }
+                   
+
+
+
+
+        }
+
+      
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+       
+       public static void PayForBus( Card card )
+         {
+                       Console.WriteLine ( "\n--- Bus Ride ---\n") ;
+
+                       List <Track> busTracks = Track.GetTracks();    
+                       
+                       int counter  =1 ; 
+                       foreach ( Track t in busTracks ) 
+                       {
+                        Console.WriteLine("Track "+ counter +"\n-->" + "Origin: " +t.Origin+ "   Destination: " + t.Destination + "   Cost: " + t.Cost ) ;
+                        counter++ ;
+                       }
+
+                       Console.Write("Enter Track Number : "); 
+                      string track_NO = Console.ReadLine() ; 
+                      int trackIndex ; 
+                       
+                       int.TryParse(track_NO , out trackIndex ); 
+                       if ( trackIndex <= busTracks.Count && trackIndex >0)
+                       {
+                            int index = trackIndex -1 ;
+                            Track selectedTrack = busTracks[index];
+                                  decimal cost = selectedTrack.Cost ;
+                                  if ( cost <= card.Balance)
+                                  {
+                                      card.Balance -= cost ; 
+                                      Database.SaveCards() ; 
+
+                                      Console.Write( "Enter Transaction ID : ");
+                                      string txnID = Console.ReadLine() ; 
+                                  
+                                      Transactions txn = new Transactions
+                                      {
+                                        TransactionId = txnID , 
+                                         CardNumber = card.CardNumber ,
+                                          TransactionType = "Payment" ,
+                                         Amount = cost 
+
+                                      };
+                                      Database.Transactions.Add(txn) ; 
+                                      Database.SaveTransactions() ; 
+
+
+
+                                  }
+                                  else if ( cost > card.Balance )
+                                  {
+                                     Console.WriteLine ( "Insufficiant Balance !") ; 
+                                     return ; 
+                                  }
+                            
+                       }
+                       else {
+                                Console.WriteLine (" invalid Track or Does not Exist " ); 
+
+                       }
+                       
+            
+
+
+
+         } 
+
+
+
+       public static void ViewTxnHistory (Card card)
+         {
+            
+            Console.WriteLine("\n--- Transaction History ---\n") ;
+
+             List<Transactions> Current = new List<Transactions> () ;   /// so we sort a little amount rather than full DB txns to improve performance 
+                   foreach (Transactions t in Database.Transactions)
+                   {
+                     if (card.CardNumber == t.CardNumber)
+                     { Current.Add(t); }
+                   }
+                     
+                     if (Current.Count == 0) { Console.WriteLine("No transaction history found."); return;}
+
+              Current.Sort((x, y) => x.TransactionType.CompareTo(y.TransactionType));  
+
+                foreach ( Transactions t in Current)
+                 {
+                     Console.WriteLine (" Type : " + t.TransactionType + " \n|Transaction ID: " + t.TransactionId + "\n|Amount : " + t.Amount ) ;
+
+                 }
+
+
+         }
+
+
+        
+      
+
+
+
 
 
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System;
-using console = System.Console;
+using Console = System.Console;
 
 using Models;
 
