@@ -30,6 +30,7 @@ namespace Models
                  new Menu {Item = "Cake" , Price = 5},
                  new Menu {Item = "Water" , Price =1}
                 
+                
             };
         }
 

@@ -4,7 +4,7 @@ using System.Text.Json;
 using system = System.Console;
 
 using Models;
-
+namespace DataBase {
 public static class Database
 {
     // Temp momory store handling : 
@@ -72,7 +72,7 @@ private static string _studentFile = "students.json";
         if (File.Exists(_txnFile))
         {
             string Json = File.ReadAllText(_txnFile); 
-            Transactions = JsonSerializer.Deserialize <List<Transaction>> (Json) ; 
+            Transactions = JsonSerializer.Deserialize <List<Transactions>> (Json) ; 
 
         }
         else
@@ -128,7 +128,7 @@ private static string _studentFile = "students.json";
 
 
 
-
+}   
 
 
 

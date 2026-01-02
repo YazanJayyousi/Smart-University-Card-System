@@ -35,9 +35,9 @@ public static List<FacultyMember> GetDefaultFaculty()
               UserId = "F01" , Name = "Sami" , TaughtCourses = new List<string> {"CPE100" , "CIS300"}
           }  ,
 
-          new FacultyMmeber
+          new FacultyMember
           {
-              UserID = "F02" , nameof = "Eman" , TaughtCourses = new List<string> { "NES200" , "SE400"}
+              UserId= "F02" , name = "Eman" , TaughtCourses = new List<string> { "NES200" , "SE400"}
               
           }
 
@@ -53,10 +53,10 @@ public static List<Card> GetDefaultCards()
     {
     return new List<Card>
     {
-      new Card {CardNumber ="10" , Balance = 80 , Type = "faculty member" , Status= "Unblocked" , UserId="F02" },
-      new Card {CardNumber ="20" , Balance = 110 , Type = "student" , Status= "Unblocked" , UserId="S02" },
-      new Card {CardNumber ="30" , Balance = 95 , Type = "student" , Status= "Blocked" , UserId="S03" },
-      new Card {CardNumber ="40" , Balance = 160 , Type = "student" , Status= "Unblocked" , UserId="S04" }  
+      new Card {CardNumber ="10" , Balance = 80 , Type = "faculty member" , Status= "unblocked" , UserId="F02" },
+      new Card {CardNumber ="20" , Balance = 110 , Type = "student" , Status= "unblocked" , UserId="S02" },
+      new Card {CardNumber ="30" , Balance = 95 , Type = "student" , Status= "blocked" , UserId="S03" },
+      new Card {CardNumber ="40" , Balance = 160 , Type = "student" , Status= "unblocked" , UserId="S04" }  
 
 
     };

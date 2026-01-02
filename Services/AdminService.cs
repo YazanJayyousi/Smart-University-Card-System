@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using Console = System.Console;
 
+using DataBase ; 
 using Models;
 
    public class AdminService
@@ -33,7 +34,7 @@ using Models;
                CardNumber = newCardNo ,
                Balance = 50 , 
                Type = newCardType , 
-               Status = "Unblocked" , 
+               Status = "unblocked" , 
                UserId = uI 
          };
          
@@ -54,7 +55,7 @@ using Models;
           
           foreach (Card c in Database.Cards)
         {
-            if ( c.Status == "Unblocked")
+            if ( c.Status == "unblocked")
             {
                 Console.WriteLine("Card Number: " + c.CardNumber + " Balance : "+c.Balance +" Type: " +c.Type +" Status: " +c.Status + " User ID : " +c.UserId) ;
             }
@@ -69,9 +70,9 @@ using Models;
             
             foreach (Card c in Database.Cards)
         {
-             if ( c.CardNumber == CN && c.Status == "Unblocked")
+             if ( c.CardNumber == CN && c.Status == "unblocked")
             {
-                c.Status = "Blocked" ; 
+                c.Status = "blocked" ; 
                 Database.SaveCards() ; 
                  Console.WriteLine ("Card Blocked ") ; 
                  found = true ; 
@@ -93,7 +94,7 @@ using Models;
 
             foreach (Card c in Database.Cards)
         {
-            if ( c.Status == "Blocked")
+            if ( c.Status == "blocked")
             {
                 Console.WriteLine("Card Number: " + c.CardNumber + " Balance : "+c.Balance +" Type: " +c.Type +" Status: " +c.Status + " User ID : " +c.UserId) ;
             }
@@ -108,9 +109,9 @@ using Models;
             
             foreach (Card c in Database.Cards)
         {
-             if ( c.CardNumber == CN)
+             if ( c.CardNumber == CN && c.Status == "blocked")
             {
-                c.Status = "Unblocked" ; 
+                c.Status = "unblocked" ; 
                 Database.SaveCards() ; 
                  Console.WriteLine ("Card Unblocked ") ; 
                  found = true ; 

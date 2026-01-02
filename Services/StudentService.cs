@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using Console = System.Console;
 
+using DataBase;
 using Models;
 
 
@@ -48,7 +49,7 @@ public class StudentService
              {
                  TransactionId = txnID , 
                  CardNumber = card.CardNumber ,
-                 TransactionType = "Recharge" ,
+                 TransactionType = "recharge" ,
                  Amount = amount.ToString() 
              };
 
@@ -136,7 +137,7 @@ int counter= 1;
     {
         TransactionId = txnID,
         CardNumber = card.CardNumber,
-        TransactionType = "Attendance",
+        TransactionType = "attendance",
         Amount = "N/A",
     };
     Database.Transactions.Add(txn);
@@ -192,7 +193,7 @@ bool ordering = true ;
                    {
                        TransactionId = txnID ,
                           CardNumber = card.CardNumber ,
-                            TransactionType = "Payment" ,
+                            TransactionType = "payment" ,
                                 Amount = total.ToString() // Defined as string in model
 
                    };
@@ -289,7 +290,7 @@ bool ordering = true ;
                                       {
                                         TransactionId = txnID , 
                                          CardNumber = card.CardNumber ,
-                                          TransactionType = "Payment" ,
+                                          TransactionType = "payment" ,
                                          Amount = cost 
 
                                       };
@@ -333,7 +334,7 @@ bool ordering = true ;
                      
                      if (Current.Count == 0) { Console.WriteLine("No transaction history found."); return;}
 
-              Current.Sort((x, y) => x.TransactionType.CompareTo(y.TransactionType));  
+              Current.Sort((x, y) => x.TransactionType.CompareTo(y.TransactionType));          // lambda expression considers XY TXN objects auto in Sort fun 
 
                 foreach ( Transactions t in Current)
                  {
