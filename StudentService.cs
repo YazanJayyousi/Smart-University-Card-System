@@ -264,7 +264,7 @@ bool ordering = true ;
                        int counter  =1 ; 
                        foreach ( Track t in busTracks ) 
                        {
-                        Console.WriteLine("Track "+ counter +"\n-->" + "Origin: " +t.Origin+ "   Destination: " + t.Destination + "   Cost: " + t.Cost ) ;
+                        Console.WriteLine("Track "+ counter +"-->" + "Origin: " +t.Origin+ "   Destination: " + t.Destination + "   Cost: " + t.Cost ) ;
                         counter++ ;
                        }
 
@@ -291,7 +291,7 @@ bool ordering = true ;
                                         TransactionId = txnID , 
                                          CardNumber = card.CardNumber ,
                                           TransactionType = "payment" ,
-                                         Amount = cost 
+                                         Amount = cost.ToString() 
 
                                       };
                                       Database.Transactions.Add(txn) ; 

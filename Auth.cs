@@ -43,9 +43,10 @@ using Models;
 
         {
             if ( c.CardNumber == CN_INP )
-               CurrentCard = c ; 
+              { CurrentCard = c ; 
                found = true ; 
-               break ;                         // Perfromanceeeee baby 
+               break ;
+               }                         // Perfromanceeeee baby 
 
         }          
          if ( found==false  )

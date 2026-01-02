@@ -130,7 +130,7 @@ public class FacultyService
         Console.WriteLine("\n--- Generate Attendance Report ---");
 
         FacultyMember currentFaculty = null;
-        foreach (FacultyMember f in Database.FacultyMembers)
+        foreach (FacultyMember f in Database.Faculty)
         {
             if (f.UserId == card.UserId)
             {
@@ -146,11 +146,11 @@ public class FacultyService
         }
 
         Console.WriteLine(" Taught Courses: ");
-        int counter = 1;
+        
         foreach (string course in currentFaculty.TaughtCourses)
         {
-            Console.WriteLine(counter + ": " + course);
-            counter++;
+            Console.WriteLine( ": " + course);
+            
         }
 
         Console.Write(" Enter Course ID: ");

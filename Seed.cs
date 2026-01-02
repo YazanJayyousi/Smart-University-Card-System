@@ -37,7 +37,7 @@ public static List<FacultyMember> GetDefaultFaculty()
 
           new FacultyMember
           {
-              UserId= "F02" , name = "Eman" , TaughtCourses = new List<string> { "NES200" , "SE400"}
+              UserId= "F02" , Name = "Eman" , TaughtCourses = new List<string> { "NES200" , "SE400"}
               
           }
 

@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System;
 
@@ -156,11 +156,12 @@ using Models ;
 
 
             }
+            else if (LoginChoice == "3") {System_On = false ; }
             else
             {
                 
-              System_On = false ; 
-
+              
+             Console.WriteLine("Invalid Choice") ; 
 
             }
 
